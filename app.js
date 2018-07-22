@@ -8,8 +8,10 @@ const mongoose = require('mongoose');
 
 //for mongoose
 mongoose.connect('mongodb://node-rest-shop:' + process.env.MONGODB_PWD + '@node-rest-shop-shard-00-00-4b5cx.mongodb.net:27017,node-rest-shop-shard-00-01-4b5cx.mongodb.net:27017,node-rest-shop-shard-00-02-4b5cx.mongodb.net:27017/test?ssl=true&replicaSet=node-rest-shop-shard-0&authSource=admin&retryWrites=true', {
-    //useMongoClient: true
+    useMongoClient: true
 })
+
+mongoose.Promise = global.Promise;
 
 //for logging
 app.use(morgan('dev'));
