@@ -16,6 +16,9 @@ mongoose.Promise = global.Promise;
 //for logging
 app.use(morgan('dev'));
 
+//making uploads statically available
+app.use('/uploads', express.static('uploads'));
+
 //for bodyParser
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
