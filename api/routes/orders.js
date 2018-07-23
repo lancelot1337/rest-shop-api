@@ -8,6 +8,7 @@ const router = express.Router();
 router.get('/', (req, res, next) => {
     Order.find()
         .select('product quantity _id')
+        .populate('product', 'name')    //name of ref prop, name of keys
         .exec()
         .then(docs => {
             res.status(200).json({
@@ -74,6 +75,7 @@ router.post('/', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
     const id = req.params.id;
     Order.findById(id)
+        .populate('product')
         .exec()
         .then(order => {
             if (!order) {
