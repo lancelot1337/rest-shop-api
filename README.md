@@ -1,2 +1,2 @@
-# npm-rest-shop
-npm-rest-shop
+# rest-shop-api
+### An api built using Node.js
