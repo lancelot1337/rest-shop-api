@@ -5,7 +5,10 @@ const Product = require('../models/product')
 //for verbs and endpoints
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
+//for jwt verify
+const checkAuth = require('../middleware/check-auth');
+
+router.get('/', checkAuth, (req, res, next) => {
     Order.find()
         .select('product quantity _id')
         .populate('product', 'name')    //name of ref prop, name of keys
@@ -33,7 +36,7 @@ router.get('/', (req, res, next) => {
         });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', checkAuth, (req, res, next) => {
     Product.findById(req.body.productId)
         .then(product => {
             if (!product) {
@@ -72,7 +75,7 @@ router.post('/', (req, res, next) => {
         });
 });
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', checkAuth, (req, res, next) => {
     const id = req.params.id;
     Order.findById(id)
         .populate('product')
@@ -98,7 +101,7 @@ router.get('/:id', (req, res, next) => {
         });
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', checkAuth, (req, res, next) => {
     Order.remove({ _id: req.params.id })
         .exec()
         .then(result => {

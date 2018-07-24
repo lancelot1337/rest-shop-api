@@ -38,6 +38,9 @@ const upload = multer({
         fileFilter: fileFilter
 });
 
+//for jwt token verification
+const checkAuth = require('../middleware/check-auth');
+
 router.get('/', (req, res, next) => {
     Product.find()
         .select('name price _id productImage')
@@ -69,7 +72,7 @@ router.get('/', (req, res, next) => {
         });
 });
 
-router.post('/', upload.single('productImage'),(req, res, next) => {
+router.post('/', checkAuth, upload.single('productImage'),(req, res, next) => {
     console.log(req.file);
     const product = new Product({
         _id: new mongoose.Types.ObjectId(),
@@ -124,7 +127,7 @@ router.get('/:id', (req, res, next) => {
         });
 });
 
-router.patch('/:id', (req, res, next) => {
+router.patch('/:id', checkAuth, (req, res, next) => {
     const id = req.params.id;
     const updateOps = {};
     for (const key in req.body) {		//or const key of Object.keys(req.body)
@@ -151,7 +154,7 @@ router.patch('/:id', (req, res, next) => {
         });
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', checkAuth, (req, res, next) => {
     const id = req.params.id;
     Product.remove({ _id: id })
         .exec()
