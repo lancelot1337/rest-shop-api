@@ -12,11 +12,11 @@ mongoose.connect('mongodb://node-rest-shop:' + process.env.MONGODB_PWD + '@node-
     useMongoClient: true
 });
 
-//mongoose.connect('mongodb://localhost/node-rest-shop').then(()=>{
-//	console.log('db connect');
-//},(e)=>{
-//	console.log('error:'+ e)
-//})
+// mongoose.connect('mongodb://localhost/node-rest-shop').then(()=>{
+// 	console.log('db connect');
+// },(e)=>{
+// 	console.log('error:'+ e)
+// })
 
 mongoose.Promise = global.Promise;
 
