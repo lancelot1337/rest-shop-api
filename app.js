@@ -16,7 +16,7 @@ mongoose.connect('mongodb://node-rest-shop:' + process.env.MONGODB_PWD + '@node-
 // 	console.log('db connect');
 // },(e)=>{
 // 	console.log('error:'+ e)
-// })
+// });
 
 mongoose.Promise = global.Promise;
 
