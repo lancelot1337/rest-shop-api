@@ -8,9 +8,14 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 //for mongoose
-mongoose.connect('mongodb://node-rest-shop:' + process.env.MONGODB_PWD + '@node-rest-shop-shard-00-00-4b5cx.mongodb.net:27017,node-rest-shop-shard-00-01-4b5cx.mongodb.net:27017,node-rest-shop-shard-00-02-4b5cx.mongodb.net:27017/test?ssl=true&replicaSet=node-rest-shop-shard-0&authSource=admin&retryWrites=true', {
-    useMongoClient: true
-});
+const uri = `mongodb://rest-shop-api:${process.env.MONGODB_PWD}@ds257981.mlab.com:57981/rest-shop-api`;
+mongoose.connect(uri, { useNewUrlParser: true })
+    .then((result => {
+        console.log(`DB connected!`);
+    }))
+    .catch(err => {
+        console.log(`DB failed to connect, error: ${err}`);
+    });
 
 // mongoose.connect('mongodb://localhost/node-rest-shop').then(()=>{
 // 	console.log('db connect');
@@ -27,17 +32,17 @@ app.use(morgan('dev'));
 app.use('/uploads', express.static('uploads'));
 
 //for bodyParser
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //to handle cross-origin resource sharing (CORS) errors
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    
+
     //browser send an OPTIONS request when we send post or put request
-    if (req.method === 'OPTIONS'){
-        res.header('Access-Control-Allow-Methods','PUT, POST, PATCH, DELETE, GET');
+    if (req.method === 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
         return res.status(200).json({});
     }
     next();
