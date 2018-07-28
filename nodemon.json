@@ -1,6 +1,6 @@
 {
     "env" : {
-        "MONGODB_PWD" : "node-rest-shop",
+        "MONGODB_PWD" : "restpass1",
         "JWT_KEY": "o9A5nw^tf98FsH*v"
     }
 }
