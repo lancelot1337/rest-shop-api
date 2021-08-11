@@ -1,9 +1,8 @@
 # rest-shop-api
 ### An api built using Node.js
-<<<<<<< HEAD
-=======
+Generic API to be used in ecommerce website/application.
+Features
 
-Deployed at: http://rest-shop-api.herokuapp.com/
-Authentication: Token
-Password Digest: brcypt
->>>>>>> f79543037bd7d842c08cec92263121ff710151f9
+1. Manage product information
+2. Manage orders
+3. JWT Authentication
